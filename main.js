@@ -1,7 +1,7 @@
 let user = 'John Doe';
 console.log(user);
 
-let student = 'Andrey';
+const student = 'Andrey';
 console.log(student);
 
 user = student;
@@ -20,7 +20,7 @@ console.log(test); // true
 //
 
 //8
-let arrFirst = [2, 3, 5, 8];
+const arrFirst = [2, 3, 5, 8];
 let result = 1;
 
 for (let i = 0; i < arrFirst.length; i++) {
@@ -29,7 +29,7 @@ for (let i = 0; i < arrFirst.length; i++) {
 console.log(result);
 
 //9
-let arrSecond = [2, 5, 8, 15, 0, 6, 20, 3];
+const arrSecond = [2, 5, 8, 15, 0, 6, 20, 3];
 
 for (let i = 0; i < arrSecond.length; i++) {
   if (arrSecond[i] > 5 && arrSecond[i] < 10) {
@@ -38,7 +38,7 @@ for (let i = 0; i < arrSecond.length; i++) {
 }
 
 //10
-let arrThird = [2, 5, 8, 15, 0, 6, 20, 3];
+const arrThird = [2, 5, 8, 15, 0, 6, 20, 3];
 
 for (let i = 0; i < arrThird.length; i++) {
   if (arrThird[i] % 2 === 0) {
