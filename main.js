@@ -89,7 +89,7 @@ console.log(max(10, 20));
 // console.log(max(11, 23));
 
 //7
-let arr = [5, 10, 20, 22, 31, 18, 11, 40, 45, 100];
+const arr = [5, 10, 20, 22, 31, 18, 11, 40, 45, 100];
 
 const changeOnZero = (arr) => {
   for (let i = 0; i < arr.length; i++) {
