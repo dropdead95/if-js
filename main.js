@@ -107,31 +107,333 @@
 
 //lesson-4
 //5
-const sum = (a) => {
-  return function (b) {
-    return a + b;
-  };
-};
+// const sum = (a) => {
+//   return function (b) {
+//     return a + b;
+//   };
+// };
+//
+// console.log(sum(2)(5));
+// //6
+// const text1 = document.getElementById('text1');
+// const text2 = document.getElementById('text2');
+// const text3 = document.getElementById('text3');
+// const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+//
+// function setColor() {
+//   let i = 0;
+//   return function (event) {
+//     event.target.style.color = colors[i];
+//     i++;
+//     if (i >= colors.length) {
+//       i = 0;
+//     }
+//     return event;
+//   };
+// }
+//
+// text1.addEventListener('click', setColor());
+// text2.addEventListener('click', setColor());
+// text3.addEventListener('click', setColor());
 
-console.log(sum(2)(5));
+// Lesson-5
+// 5
+const date = '2020-11-26';
+
+function modifyDate(date) {
+  const newDate = date.split('-').reverse().join('.');
+  console.log(`${date} была заменена на ${newDate}`);
+}
+modifyDate(date);
+
 //6
-const text1 = document.getElementById('text1');
-const text2 = document.getElementById('text2');
-const text3 = document.getElementById('text3');
-const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+const data = [
+  {
+    country: 'Russia',
+    city: 'Saint Petersburg',
+    hotel: 'Hotel Leopold',
+  },
+  {
+    country: 'Spain',
+    city: 'Santa Cruz de Tenerife',
+    hotel: 'Apartment Sunshine',
+  },
+  {
+    country: 'Slowakia',
+    city: 'Vysokie Tatry',
+    hotel: 'Villa Kunerad',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hostel Friendship',
+  },
+  {
+    country: 'Indonesia',
+    city: 'Bali',
+    hotel: 'Ubud Bali Resort&SPA',
+  },
+  {
+    country: 'Netherlands',
+    city: 'Rotterdam',
+    hotel: 'King Kong Hostel',
+  },
+  {
+    country: 'Marocco',
+    city: 'Ourika',
+    hotel: 'Rokoko Hotel',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hotel Rehberge Berlin Mitte',
+  },
+];
 
-function setColor() {
-  let i = 0;
-  return function (event) {
-    event.target.style.color = colors[i];
-    i++;
-    if (i >= colors.length) {
-      i = 0;
+function search(str) {
+  const res = [];
+  for (let i = 0; i < data.length; i++) {
+    const currentString = `${data[i].country} ${data[i].city} ${data[i].hotel}`;
+    if (currentString.toUpperCase().includes(str.toUpperCase())) {
+      res.push(currentString);
     }
-    return event;
-  };
+  }
+  return res;
 }
 
-text1.addEventListener('click', setColor());
-text2.addEventListener('click', setColor());
-text3.addEventListener('click', setColor());
+console.log(search('ger'));
+
+// lesson-6
+// 5
+// function palindrome(str) {
+//   return str === str.split('').reverse().join('');
+// }
+// palindrome('привет');
+// 6
+// const data = [
+//   {
+//     country: 'Russia',
+//     city: 'Saint Petersburg',
+//     hotel: 'Hotel Leopold',
+//   },
+//   {
+//     country: 'Spain',
+//     city: 'Santa Cruz de Tenerife',
+//     hotel: 'Apartment Sunshine',
+//   },
+//   {
+//     country: 'Slowakia',
+//     city: 'Vysokie Tatry',
+//     hotel: 'Villa Kunerad',
+//   },
+//   {
+//     country: 'Germany',
+//     city: 'Berlin',
+//     hotel: 'Hostel Friendship',
+//   },
+//   {
+//     country: 'Indonesia',
+//     city: 'Bali',
+//     hotel: 'Ubud Bali Resort&SPA',
+//   },
+//   {
+//     country: 'Netherlands',
+//     city: 'Rotterdam',
+//     hotel: 'King Kong Hostel',
+//   },
+//   {
+//     country: 'Marocco',
+//     city: 'Ourika',
+//     hotel: 'Rokoko Hotel',
+//   },
+//   {
+//     country: 'Germany',
+//     city: 'Berlin',
+//     hotel: 'Hotel Rehberge Berlin Mitte',
+//   },
+// ];
+//
+// function find(str) {
+//   const newData = data.filter(
+//     (obj) => obj.city === str || obj.country === str || obj.hotel === str,
+//   );
+//   const newStr = newData.map(
+//     (obj) => `${obj.country}, ${obj.city}, ${obj.hotel}`,
+//   );
+//   return newStr;
+// }
+// console.log(find('Netherlands'));
+
+// const hotels = [
+//   {
+//     name: 'Hotel Leopold',
+//     city: 'Saint Petersburg',
+//     country: 'Russia',
+//   },
+//   {
+//     name: 'Apartment Sunshine',
+//     city: 'Santa Cruz de Tenerife',
+//     country: 'Spain',
+//   },
+//   {
+//     name: 'Villa Kunerad',
+//     city: 'Vysokie Tatry',
+//     country: 'Slowakia',
+//   },
+//   {
+//     name: 'Hostel Friendship',
+//     city: 'Berlin',
+//     country: 'Germany',
+//   },
+//   {
+//     name: 'Radisson Blu Hotel',
+//     city: 'Kyiv',
+//     country: 'Ukraine',
+//   },
+//   {
+//     name: 'Paradise Hotel',
+//     city: 'Guadalupe',
+//     country: 'Mexico',
+//   },
+//   {
+//     name: 'Hotel Grindewald',
+//     city: 'Interlaken',
+//     country: 'Switzerland',
+//   },
+//   {
+//     name: 'The Andaman Resort',
+//     city: 'Port Dickson',
+//     country: 'Malaysia',
+//   },
+//   {
+//     name: 'Virgin Hotel',
+//     city: 'Chicago',
+//     country: 'USA',
+//   },
+//   {
+//     name: 'Grand Beach Resort',
+//     city: 'Dubai',
+//     country: 'United Arab Emirates',
+//   },
+//   {
+//     name: 'Shilla Stay',
+//     city: 'Seoul',
+//     country: 'South Korea',
+//   },
+//   {
+//     name: 'San Firenze Suites',
+//     city: 'Florence',
+//     country: 'Italy',
+//   },
+//   {
+//     name: 'The Andaman Resort',
+//     city: 'Port Dickson',
+//     country: 'Malaysia',
+//   },
+//   {
+//     name: 'Black Penny Villas',
+//     city: 'BTDC, Nuca Dua',
+//     country: 'Indonesia',
+//   },
+//   {
+//     name: 'Koko Hotel',
+//     city: 'Tokyo',
+//     country: 'Japan',
+//   },
+//   {
+//     name: 'Ramada Plaza',
+//     city: 'Istanbul',
+//     country: 'Turkey',
+//   },
+//   {
+//     name: 'Waikiki Resort Hotel',
+//     city: 'Hawaii',
+//     country: 'USA',
+//   },
+//   {
+//     name: 'Puro Hotel',
+//     city: 'Krakow',
+//     country: 'Poland',
+//   },
+//   {
+//     name: 'Asma Suites',
+//     city: 'Santorini',
+//     country: 'Greece',
+//   },
+//   {
+//     name: 'Cityden Apartments',
+//     city: 'Amsterdam',
+//     country: 'Netherlands',
+//   },
+//   {
+//     name: 'Mandarin Oriental',
+//     city: 'Miami',
+//     country: 'USA',
+//   },
+//   {
+//     name: 'Concept Terrace Hotel',
+//     city: 'Rome',
+//     country: 'Italy',
+//   },
+//   {
+//     name: 'Ponta Mar Hotel',
+//     city: 'Fortaleza',
+//     country: 'Brazil',
+//   },
+//   {
+//     name: 'Four Seasons Hotel',
+//     city: 'Sydney',
+//     country: 'Australia',
+//   },
+//   {
+//     name: 'Le Meridien',
+//     city: 'Nice',
+//     country: 'France',
+//   },
+//   {
+//     name: 'Apart Neptun',
+//     city: 'Gdansk',
+//     country: 'Poland',
+//   },
+//   {
+//     name: 'Lux Isla',
+//     city: 'Ibiza',
+//     country: 'Spain',
+//   },
+//   {
+//     name: 'Nox Hostel',
+//     city: 'London',
+//     country: 'UK',
+//   },
+//   {
+//     name: 'Leonardo Vienna',
+//     city: 'Vienna',
+//     country: 'Austria',
+//   },
+//   {
+//     name: 'Adagio Aparthotel',
+//     city: 'Edinburgh',
+//     country: 'UK',
+//   },
+//   {
+//     name: 'Steigenberger Hotel',
+//     city: 'Hamburg',
+//     country: 'Germany',
+//   },
+// ];
+//
+// function unique (data) {
+//   data.reduce((acc, item) => {
+//     const res = acc
+//     // if (Есть ли такой ключ в объекте(item.country)) {
+//
+//     }
+//   }, {})
+// }
+// {
+//   Australia: ['Sydney'],
+//       Germany: ['Berlin', 'Hamburg'],
+//     Italy: ['Florence', 'Rome'],
+//     USA: ['Chicago', 'Hawaii', 'Miami'],
+//     Ukraine: ['Kyiv']
+// }
