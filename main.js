@@ -424,7 +424,7 @@ const hotels = [
   },
 ];
 
-let hotelsByCountries = {};
+const hotelsByCountries = {};
 
 hotels.map((el) => {
   if (hotelsByCountries[el.country]) {
