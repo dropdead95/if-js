@@ -434,58 +434,138 @@
 // console.log(hotelsByCountries);
 
 //lesson-7
-const obj1 = {
-  a: 'a',
-  b: {
-    a: 'a',
-    b: 'b',
-    c: {
-      a: 1,
-    },
-  },
-};
-const obj2 = {
-  b: {
-    c: {
-      a: 1,
-    },
-    b: 'b',
-    a: 'a',
-  },
-  a: 'a',
-};
-const obj3 = {
-  a: {
-    c: {
-      a: 'a',
-    },
-    b: 'b',
-    a: 'a',
-  },
-  b: 'b',
-};
+// const obj1 = {
+//   a: 'a',
+//   b: {
+//     a: 'a',
+//     b: 'b',
+//     c: {
+//       a: 1,
+//     },
+//   },
+// };
+// const obj2 = {
+//   b: {
+//     c: {
+//       a: 1,
+//     },
+//     b: 'b',
+//     a: 'a',
+//   },
+//   a: 'a',
+// };
+// const obj3 = {
+//   a: {
+//     c: {
+//       a: 'a',
+//     },
+//     b: 'b',
+//     a: 'a',
+//   },
+//   b: 'b',
+// };
+//
+// const deepEqual = (object1, object2) => {
+//   const props1 = Object.keys(object1);
+//   const props2 = Object.keys(object2);
+//
+//   if (props1.length !== props2.length) {
+//     return false;
+//   }
+//
+//   for (let i = 0; i < props1.length; i++) {
+//     const prop = props1[i];
+//     const bothAreObjects =
+//       typeof object1[prop] === 'object' && typeof object2[prop] === 'object';
+//
+//     if (
+//       (!bothAreObjects && object1[prop] !== object2[prop]) ||
+//       (bothAreObjects && !deepEqual(object1[prop], object2[prop]))
+//     ) {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
+// console.log(deepEqual(obj1, obj2));
+// console.log(deepEqual(obj1, obj3));
 
-const deepEqual = (object1, object2) => {
-  const props1 = Object.keys(object1);
-  const props2 = Object.keys(object2);
+//lesson-8
 
-  if (props1.length !== props2.length) {
-    return false;
+const studentsData = [
+  {
+    firstName: 'Василий',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Java',
+  },
+  {
+    firstName: 'Иван',
+    lastName: 'Иванов',
+    admissionYear: 2018,
+    courseName: 'JavaScript',
+  },
+  {
+    firstName: 'Александр',
+    lastName: 'Федоров',
+    admissionYear: 2017,
+    courseName: 'Python',
+  },
+  {
+    firstName: 'Николай',
+    lastName: 'Петров',
+    admissionYear: 2019,
+    courseName: 'Android',
+  },
+];
+
+class User {
+  constructor({ firstName, lastName }) {
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
-  for (let i = 0; i < props1.length; i++) {
-    const prop = props1[i];
-    const bothAreObjects =
-      typeof object1[prop] === 'object' && typeof object2[prop] === 'object';
-
-    if (
-      (!bothAreObjects && object1[prop] !== object2[prop]) ||
-      (bothAreObjects && !deepEqual(object1[prop], object2[prop]))
-    ) {
-      return false;
-    }
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
   }
-  return true;
-};
-console.log(deepEqual(obj1, obj2));
-console.log(deepEqual(obj1, obj3));
+}
+
+class Student extends User {
+  constructor({ admissionYear, courseName, firstName, lastName }) {
+    super({ firstName, lastName });
+    this.admissionYear = admissionYear;
+    this.courseName = courseName;
+  }
+
+  get course() {
+    const currentYear = new Date().getFullYear();
+    return currentYear - this.admissionYear;
+  }
+}
+
+class Students {
+  constructor(studentsData) {
+    this.studentsData = studentsData.sort(this.byField('admissionYear')).map(
+      (el) =>
+        new Student({
+          admissionYear: el.admissionYear,
+          courseName: el.courseName,
+          firstName: el.firstName,
+          lastName: el.lastName,
+        }),
+    );
+  }
+
+  byField(field) {
+    return (a, b) => (a[field] < b[field] ? 1 : -1);
+  }
+
+  getInfo() {
+    return this.studentsData.map((el) => {
+      return `${el.fullName} - ${el.courseName}, ${el.course} курс`;
+    });
+  }
+}
+
+const students = new Students(studentsData);
+console.log(students.getInfo());
