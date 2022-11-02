@@ -1,0 +1,14 @@
+include ../offer-section/offer-section-content
+
+mixin offer-section
+  section.offer
+    .offer__container._container
+      h1.offer__title What do we offer
+      ul.offer__features.row
+        each card in features
+          li.col-lg-3.col-md-6.col-sm-3.col-xs-4.features__support.features__item
+            .support__img
+              svg.item__img
+                use(href=card.image)
+            h2.support__subtitle.features__subtitle
+              | #{ card.title }

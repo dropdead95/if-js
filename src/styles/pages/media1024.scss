@@ -1,0 +1,75 @@
+@media (max-width: 1024px) {
+  .col-md-1 {
+    width: var(--col-width);
+  }
+
+  .col-md-2 {
+    width: calc(var(--col-width) * 2);
+  }
+
+  .col-md-3 {
+    width: calc(var(--col-width) * 3);
+  }
+
+  .col-md-4 {
+    width: calc(var(--col-width) * 4);
+  }
+
+  .col-md-5 {
+    width: calc(var(--col-width) * 5);
+  }
+
+  .col-md-6 {
+    width: calc(var(--col-width) * 6);
+  }
+
+  .col-md-7 {
+    width: calc(var(--col-width) * 7);
+  }
+
+  .col-md-8 {
+    width: calc(var(--col-width) * 8);
+  }
+
+  .col-md-9 {
+    width: calc(var(--col-width) * 9);
+  }
+
+  .col-md-10 {
+    width: calc(var(--col-width) * 10);
+  }
+
+  .col-md-11 {
+    width: calc(var(--col-width) * 11);
+  }
+
+  .col-md-12 {
+    width: calc(var(--col-width) * 12);
+  }
+
+  .offer__features {
+    row-gap: 32px;
+  }
+
+  .item__img {
+    margin: 0 0 16px;
+  }
+
+  .content__form-subtitle-destination {
+    margin-right: -17px;
+  }
+
+  .cards-item__image-button {
+    min-width: 110px;
+    font-size: 16px;
+  }
+
+  .homes__slider-btn {
+    left: calc(97% - 9px);
+  }
+
+  .reviews__slider-btn {
+    top: calc(62% - 287px);
+    left: calc(98% - 22px);
+  }
+}

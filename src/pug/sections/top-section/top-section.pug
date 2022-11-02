@@ -1,0 +1,83 @@
+include ../top-section/top-section-content
+
+mixin top-section
+  section.top-section
+    .top-section__container._container
+      .top-section__header.row
+        a.header__logo.col-lg-9.col-md-9.col-sm-5.col-xs-5(href='#')
+          svg.header__logo_icon
+            use(href='#header-logo')
+        .menu__burger
+          span
+        ul.menu-burger-content
+          each menuItem in menuBurger
+            li.menu-burger-content__item
+              a.menu-burger-content__link(href=menuItem.link) #{ menuItem.menuName }
+        nav.header__menu
+          ul.menu__list
+            li.menu__item
+              a.menu__link.menu__link_stays(href='#') Stays
+            li.menu__item
+              a.menu__link.menu__link_attractions(href='#') Attractions
+        a.header__night-button(href='#')
+          svg.header__night-button-icon
+            use(href='#night-icon')
+        a.header__account-button(href='#')
+          svg.header__account-button-icon
+            use(href='#account-icon')
+      .top-section__content
+        h1.content__title
+          | Discover stays to live, work or just relax
+        .content__form-subtitle.row
+          label.content__form-subtitle-destination.content__form-subtitle-item.col-lg-5.col-md-5(for='destination')
+            | Your destination or hotel name
+          label.content__form-subtitle-checkin.content__form-subtitle-item(for='check-in') Check-in&ndash;
+          label.content__form-subtitle-checkout.content__form-subtitle-item(for='check-out') Check-out
+        form.content__form.row(action='#')
+          img.search-icon(src=require('../../../assets/images/top-section/icons/search.svg'), alt='')
+          input#destination.content__form_destination.col-lg-5.col-sm-6(
+            name='destination',
+            type='text',
+            placeholder='Your destination or hotel name'
+          )
+          .check__wrapper.col-lg-2.col-sm-6
+            label.check-in-text(for='check-in') Check-in
+            label.check-out-text(for='check-out') Check-out
+            input#check-in.content__form_check-in.date-item(name='check-in', type='date')
+            input#check-out.content__form_check-out.date-item(name='check-out', type='date')
+          .select__wrapper.col-lg-3.col-sm-6
+            .input-wrapper
+              input#adults.content__form_adults.select-item.col-lg-4(name='adults')
+            .input-wrapper
+              input#children.content__form_children.select-item.col-lg-4(name='children')
+            .input-wrapper
+              input#room.content__form_room.select-item.col-lg-4(name='room')
+            .filter__wrapper
+              .filter__item
+                p.item__title Adults
+                button.filter__button.filter__button-dec -
+
+                .item__counter 0
+                button.filter__button.filter__button-inc +
+              .filter__item
+                p.item__title Children
+                button.filter__button.filter__button-dec -
+
+                .item__counter 0
+                button.filter__button.filter__button-inc +
+              .filter__item
+                p.item__title Rooms
+                button.filter__button.filter__button-dec -
+
+                .item__counter 0
+                button.filter__button.filter__button-inc +
+
+          button.content__form_button.col-lg-2.col-sm-6(type='submit')
+            | Search
+        .content__download
+          a.content__download_google(href='#')
+            svg.content__download_google-icon
+              use(href='#google-play-icon')
+          a.content__download_appstore(href='#')
+            svg.content__download_appstore-icon
+              use(href='#appstore-icon')

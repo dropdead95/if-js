@@ -1,0 +1,22 @@
+mixin advertisement-section
+  section.advertisement
+    .advertisement__container._container
+      .advertisement__content
+        a.advertisement__content-close(href='#')
+          svg.advertisement__content-close-icon(viewbox='0 0 26 26', xmlns='http://www.w3.org/2000/svg')
+            path(
+              d='M26 1.4857L24.5144 0L13 11.5143L1.4857 0L0 1.4857L11.5143 13L0 24.5144L1.4857 26L13 14.4857L24.5144 26L26 24.5144L14.4857 13L26 1.4857Z'
+            )
+        .advertisement__content-main
+          .advertisement__content-main-logo
+            img.advertisement__content-main-logo-icon(
+              src=require('../../../assets/images/advertisement/logo-adv-mobile.png'),
+              alt=''
+            )
+          .advertisement__content-main-image
+            img.advertisement__content-main-icon(src=require('../../../assets/images/advertisement/user.png'), alt='')
+          .advertisement__content-main-text
+            .advertisement__content-main-desc
+              | Sign up and get 20% off your first booking
+            a.advertisement__content-main-btn(href='#') Sign up
+            a.advertisement__content-main-btn-mobile(href='') Install

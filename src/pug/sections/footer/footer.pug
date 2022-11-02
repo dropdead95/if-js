@@ -1,0 +1,26 @@
+include ../footer/footer-content
+
+mixin footer
+  footer.footer
+    .footer__container._container
+      a.footer__logo(href='#')
+        svg.footer__logo_icon
+          use(href='#header-logo')
+      .footer__content.row
+        ul.col-lg-4.col-sm-2.footer__about
+          a.footer__about_link.link__title(href='#') About
+            each listItem in listAbout
+              li.about__item.list__item
+                a.about__item_link.item__link(href='') #{ listItem.linkName }
+        ul.col-lg-4.col-sm-6.footer__property
+          a.footer__property_link.link__title(href='#') Property types
+          each listItem in listProperty
+            li.property__item.list__item
+              a.property__item_link.item__link(href='') #{ listItem.linkName }
+        ul.col-lg-4.col-sm-2.footer__support
+          a.footer__support_link.link__title(href='#') Support
+          each listItem in listSupport
+            li.support__item.list__item
+              a.support__item_link.item__link(href='') #{ listItem.linkName }
+      .footer__copyright
+        | &copy; 2020 Triphouse, Inc. All rights reserved
