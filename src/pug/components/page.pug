@@ -1,0 +1,17 @@
+mixin page(props)
+  doctype html
+  html
+    head
+      meta(charset='UTF-8')
+      meta(
+        name='viewport',
+        content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'
+      )
+      meta(http-equiv='X-UA-Compatible', content='ie=edge')
+      link(type='image/x-icon', href=require('../../assets/images/favicon.ico'), rel='shortcut icon')
+      link(href=require('../../../node_modules/swiper/swiper.min.css'), rel='stylesheet')
+      link(rel='stylesheet', href=require('../../styles/index.scss'))
+      title= props.title
+    body
+      block
+      script(src=require('../../../src/js/index'), defer)

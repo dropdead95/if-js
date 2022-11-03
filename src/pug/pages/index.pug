@@ -1,0 +1,24 @@
+include ../sections/top-section/top-section
+include ../sections/offer-section/offer-section
+include ../sections/homes-section/homes-section
+include ../sections/destinations-section/destinations-section
+include ../sections/advertisement-section/advertisement-section
+include ../sections/reviews-section/reviews-section
+include ../sections/footer/footer
+
+include ../components/sprite
+include ../components/page
+
+- var pageInfo = { title: 'TripHouse' };
+
++page(pageInfo)
++sprite
+.wrapper
+  main.main
+    +top-section
+    +offer-section
+    +homes-section
+    +destinations-section
+    +advertisement-section
+    +reviews-section
+  +footer

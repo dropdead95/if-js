@@ -1,0 +1,24 @@
+include ../destinations-section/destinations-sections-content
+
+mixin destinations-section
+  section.destinations
+    .destinations__container._container
+      .destinations__title._title-section
+        | The best destinations
+      .destinations__tabs
+        .destinations__tabs-item Regions
+        .destinations__tabs-item Cities
+        .destinations__tabs-item.destinations__tabs-item--desktop
+          | Places of interest
+        .destinations__tabs-item.destinations__tabs-item--mobile
+          | Places
+      .destinations__cards
+        each card in cards
+          .destinations__cards-item
+            .cards-item__content
+              .cards-item__image
+                img.cards-item__image-img(src=require(card.image), alt='')
+                a.cards-item__image-button(href='#') Book now
+              .cards-item__title #{ card.title }
+        a.destinations__cards-btn(href='#')
+          img.destinations__cards-btn-icon(src=require('../../../assets/images/destinations/arrowbtn.svg'), alt='')

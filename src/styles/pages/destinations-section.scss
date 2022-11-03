@@ -1,0 +1,125 @@
+.destinations {
+  &__container {
+    padding-top: 120px;
+    padding-bottom: 209px;
+  }
+
+  &__tabs {
+    display: flex;
+    align-items: center;
+    background: var(--stroke-color);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 622px;
+    margin-bottom: 64px;
+  }
+
+  &__tabs-item {
+    padding: 17px 0;
+    flex-basis: 192px;
+    font-size: 24px;
+    line-height: 117%;
+    color: var(--text-color);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__tabs-item:hover {
+    border-radius: 8px;
+    background: var(--general-blue);
+    color: var(--general-white);
+    transition: all 300ms;
+  }
+
+  &__tabs-item--desktop {
+    flex-basis: 238px;
+  }
+
+  &__tabs-item--mobile {
+    display: none;
+  }
+
+  &__cards {
+    position: relative;
+    display: flex;
+    margin: 0 -8px;
+  }
+
+  &__cards-item {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  &__cards-btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: calc(50% - 20px);
+    bottom: -30%;
+    background-color: var(--stroke-color);
+    border-radius: 50%;
+    transform: rotate(-270deg);
+  }
+
+  &__cards-btn-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.cards-item {
+  &__image {
+    position: relative;
+    margin-bottom: 24px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-color: rgb(56 56 56 / 40%);
+      opacity: 0;
+      z-index: 2;
+    }
+  }
+
+  &__image-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 117%;
+    color: var(--general-blue);
+  }
+
+  &__image-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    min-width: 128px;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0;
+    background: var(--general-white);
+    border: 1px solid var(--general-blue);
+    border-radius: 8px;
+    font-size: 18px;
+    line-height: 117%;
+    padding: 13px 0;
+    color: var(--general-blue);
+  }
+}
+
+.destinations__cards-item:hover .cards-item__image::after,
+.destinations__cards-item:hover .cards-item__image-button {
+  opacity: 1;
+  transition: all 1000ms;
+}
