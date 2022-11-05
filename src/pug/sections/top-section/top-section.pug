@@ -51,56 +51,54 @@ mixin top-section
             .input-wrapper
               input#children.content__form_children.select-item.col-lg-4( value = '0 Children' name='children' disabled)
             .input-wrapper
-              input#room.content__form_room.select-item.col-lg-4(value = '1 Room ' name='room' disabled)
-            .filter__wrapper.hide
-              .filter__item
-                p.item__title.item__title--adults Adults
-                .filter__item-counter
-                  button#button-adults.filter__button.filter__button--dec(type=button) -
-                  .filter__input-wrapper
-                    input.item__counter(value=1, type='text', disabled)
-                  button.filter__button.filter__button--inc(type=button) +
-              .filter__item
-                p.item__title.item__title--children Children
-                .filter__item-counter
-                  button#button-children.filter__button.filter__button--dec(type=button) -
-                  .filter__input-wrapper
-                    input.item__counter(value=0, type='text', disabled)
-                  button.filter__button.filter__button--inc(type=button) +
-              .filter__item
-                p.item__title.item__title--rooms Rooms
-                .filter__item-counter
-                  button#button-rooms.filter__button.filter__button--dec(type=button) -
-                  .filter__input-wrapper
-                    input.item__counter(value=1, type='text', disabled)
-                  button.filter__button.filter__button--inc(type=button) +
-              .filter__additional-content.hide
-                p.filter__additional-text What is the age of the child you’re travelling with?
-                svg.filter__additional-icon
-                  use(href='#select')
-                select.filter__additional-select(size=1)
-                  option 0 years old
-                  option 1 years old
-                  option 2 years old
-                  option 3 years old
-                  option 4 years old
-                  option 5 years old
-                  option 6 years old
-                  option 7 years old
-                  option 8 years old
-                  option 9 years old
-                  option 10 years old
-                  option 11 years old
-                  option 12 years old
-                  option 13 years old
-                  option 14 years old
-                  option 15 years old
-                  option 16 years old
-                  option 17 years old
-                  option 18 years old
-
-          button.content__form_button.col-lg-2.col-sm-6(type='submit')
-            | Search
+              input#rooms.content__form_room.select-item.col-lg-4(value = '1 Room ' name='room' disabled)
+          button.content__form_button.col-lg-2.col-sm-6(type='submit') Search
+          .filter__wrapper.hide
+            .filter__item
+              p.item__title.item__title--adults Adults
+              .filter__item-counter
+                button.filter__button--adults.filter__button--dec(type=button) -
+                .filter__input-wrapper
+                  input.item__counter--adults(value=1, type='text', disabled)
+                button.filter__button--adults.filter__button--inc(type=button) +
+            .filter__item
+              p.item__title.item__title--children Children
+              .filter__item-counter
+                button.filter__button--children.filter__button--dec(type=button) -
+                .filter__input-wrapper
+                  input.item__counter--children(value=0, type='text', disabled)
+                button.filter__button--children.filter__button--inc(type=button) +
+            .filter__item
+              p.item__title.item__title--rooms Rooms
+              .filter__item-counter
+                button.filter__button--rooms.filter__button--dec(type=button) -
+                .filter__input-wrapper
+                  input.item__counter--rooms(value=1, type='text', disabled)
+                button.filter__button--rooms.filter__button--inc(type=button) +
+            .filter__additional-content.hide
+              p.filter__additional-text What is the age of the child you’re travelling with?
+              svg.filter__additional-icon
+                use(href='#select')
+              select.filter__additional-select(size=1)
+                option 0 years old
+                option 1 years old
+                option 2 years old
+                option 3 years old
+                option 4 years old
+                option 5 years old
+                option 6 years old
+                option 7 years old
+                option 8 years old
+                option 9 years old
+                option 10 years old
+                option 11 years old
+                option 12 years old
+                option 13 years old
+                option 14 years old
+                option 15 years old
+                option 16 years old
+                option 17 years old
+                option 18 years old
         .content__download
           a.content__download_google(href='#')
             svg.content__download_google-icon

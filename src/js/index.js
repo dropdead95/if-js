@@ -31,14 +31,16 @@ reviewsSlider();
 
 const selectWrapper = document.querySelector('.select__wrapper');
 const filterWrapper = document.querySelector('.filter__wrapper');
-const filterItems = document.querySelectorAll('.filter__item');
-const adultsInput = document.getElementById('adults');
-const childrenInput = document.getElementById('children');
-const roomsInput = document.getElementById('room');
-const adultsDecBtn = document.getElementById('button-adults');
-const childrenDecBtn = document.getElementById('button-children');
-const roomsDecBtn = document.getElementById('button-rooms');
-const additionalContent = document.querySelector('.filter__additional-content');
+const inputAdults = document.getElementById('adults');
+const inputChildren = document.getElementById('children');
+const inputRooms = document.getElementById('rooms');
+const counterInputAdults = document.querySelector('.item__counter--adults');
+const counterInputChildren = document.querySelector('.item__counter--children');
+const additional = document.querySelector('.filter__additional-content');
+const counterInputRooms = document.querySelector('.item__counter--rooms');
+const counterBtnsAdults = document.querySelectorAll('.filter__button--adults');
+const counterBtnsChildren = document.querySelectorAll('.filter__button--children');
+const counterBtnsRooms = document.querySelectorAll('.filter__button--rooms');
 
 const showFilter = () => {
   filterWrapper.classList.remove('hide');
@@ -58,58 +60,46 @@ window.addEventListener('click', (e) => {
   }
 });
 
-adultsDecBtn.disabled = true;
-childrenDecBtn.disabled = true;
-roomsDecBtn.disabled = true;
-
-filterItems.forEach((item) => {
-  item.addEventListener('click', (e) => {
-    e.preventDefault();
-    const counter = e.target.closest('.filter__item').querySelector('.filter__item-counter');
-    const counterInput = e.target.closest('.filter__item').querySelector('.item__counter');
-    let value = counterInput.value;
-
-    function changeInputs(titleInputClass, rangeLow, rangeHigh, inputType, valueName, valueNames, differentCondition) {
-      if (
-        e.target.classList.contains('filter__button--inc') &&
-        counter.previousSibling.classList.contains(titleInputClass)
-      ) {
-        if (differentCondition) {
-          value++;
-          inputType.value = `${value} ${valueNames}`;
-        }
-      } else if (
-        e.target.classList.contains('filter__button--dec') &&
-        counter.previousSibling.classList.contains(titleInputClass)
-      ) {
-        if (value <= rangeLow) {
-          value;
-          inputType.value = `${value} ${valueName}`;
-        } else {
-          value--;
-          inputType.value = `${value} ${valueNames}`;
-
-          if (value === 1) {
-            inputType.value = `${value} ${valueName}`;
-          }
-        }
+let counterAdults = 1;
+let counterChildren = 0;
+let counterRooms = 1;
+const changeInputCounter = (
+  buttonsType,
+  counterType,
+  counterInputType,
+  inputType,
+  minCount,
+  maxCount,
+  name,
+  value,
+  addValue,
+) => {
+  buttonsType.forEach((btn, index) => {
+    buttonsType[0].disabled = true;
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (index === 0 && counterType > minCount) {
+        counterType--;
+      } else if (index === 1 && counterType < maxCount) {
+        counterType++;
       }
-    }
-
-    changeInputs(
-      'item__title--adults',
-      1,
-      30,
-      adultsInput,
-      'Adult',
-      'Adults',
-      'value >= rangeLow && value < rangeHigh',
-    );
-    changeInputs('item__title--rooms', 1, 30, roomsInput, 'Room', 'Rooms', 'value >= rangeLow && value < rangeHigh');
-    changeInputs('item__title--children', 0, 10, childrenInput, 'Children', 'Children', 'value < rangeLow');
-    counterInput.value = value;
+      if (counterType === value) {
+        buttonsType[0].disabled = true;
+      } else {
+        buttonsType[0].disabled = false;
+      }
+      if (counterType === addValue) {
+        additional.classList.remove('hide');
+      } else if (counterType === 0) additional.classList.add('hide');
+      counterInputType.value = counterType;
+      inputType.value = `${counterType} ${name}`;
+    });
   });
-});
+};
+
+changeInputCounter(counterBtnsAdults, counterAdults, counterInputAdults, inputAdults, 1, 30, 'Adults', 1);
+changeInputCounter(counterBtnsChildren, counterChildren, counterInputChildren, inputChildren, 0, 10, 'Children', 0, 1);
+changeInputCounter(counterBtnsRooms, counterRooms, counterInputRooms, inputRooms, 1, 30, 'Rooms', 1);
 
 // close adv
 

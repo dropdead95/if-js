@@ -161,6 +161,7 @@
   }
 
   &__form {
+    position: relative;
     display: flex;
     width: 100%;
     align-items: center;
@@ -250,13 +251,13 @@
 }
 
 select {
+
   appearance: none;
-  position: relative;
   outline: none;
 }
 
 .select__wrapper {
-  position: relative;
+
   display: flex;
   margin-left: 2px;
 }
@@ -284,7 +285,7 @@ select {
     padding: 22px;
     background: #ffffff;
     border-radius: 8px;
-    right: 0;
+    right: 200px;
     top: 76px;
     width: 259px;
   }
@@ -301,7 +302,7 @@ select {
   line-height: 19px;
 }
 
-.filter__button {
+.filter__button--adults, .filter__button--children, .filter__button--rooms {
   width: 30px;
   height: 30px;
   background-color: transparent;
@@ -317,7 +318,7 @@ select {
   }
 }
 
-.item__counter {
+.item__counter--adults,.item__counter--children, .item__counter--rooms  {
   width: 40px;
   text-align: center;
   font-size: 16px;
