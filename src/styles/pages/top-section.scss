@@ -342,11 +342,11 @@ select {
   line-height: 14px;
 }
 .filter__additional-select {
-  position: relative;
   font-family: Roboto, sans-serif;
   color: var(--text-color);
   padding: 8px 32px 8px 8px;
   border: 1px solid #3077c6;
+  margin-bottom: 5px;
 
   option {
     font-family: Roboto, sans-serif;
@@ -355,13 +355,16 @@ select {
     line-height: 14px;
   }
 }
+.select--wrapper {
+  position: relative;
+}
 .filter__additional-icon {
   position: absolute;
   fill: #3077c6;
   width: 12px;
   height: 8px;
   left: 117px;
-  bottom: 33px;
+  bottom: 38px;
   z-index: 1;
 }
 .input-wrapper {

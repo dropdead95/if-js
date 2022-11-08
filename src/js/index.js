@@ -84,15 +84,16 @@ const changeInputCounter = (
       if (index === 0 && counterType > minCount) {
         counterType--;
         if (e.target.classList.contains('filter__button--children--dec')) {
-          childrenNums.pop();
-          console.log(childrenNums);
+          document.querySelector('.filter__additional-select').remove();
         }
       } else if (index === 1 && counterType < maxCount) {
         counterType++;
-        if (e.target.classList.contains('filter__button--children--inc')) childrenNums.push(counterType);
-        childrenNums.map((i) => {
-          const selectWrapper = document.createElement('div');
-          selectWrapper.innerHTML = `<select class="filter__additional-select" id=${i}>
+        if (e.target.classList.contains('filter__button--children--inc')) {
+          childrenNums.push(counterType);
+          childrenNums.map((i) => {
+            const selectWrapper = document.createElement('div');
+            selectWrapper.classList.add('select--wrapper');
+            selectWrapper.innerHTML = `<select class="filter__additional-select" id=${i}>
                                         <option>0 years old</option>
                                         <option>1 years old</option>
                                         <option>2 years old</option>
@@ -113,8 +114,10 @@ const changeInputCounter = (
                                         <option>17 years old</option>
                                         <option>18 years old</option>
                                      </select>`;
-          additional.appendChild(selectWrapper);
-        });
+            additional.appendChild(selectWrapper);
+          });
+          childrenNums = [];
+        }
       }
       buttonsType[0].disabled = counterType === value;
       if (counterType === addValue) {
