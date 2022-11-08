@@ -64,10 +64,10 @@ mixin top-section
             .filter__item
               p.item__title.item__title--children Children
               .filter__item-counter
-                button.filter__button--children.filter__button--dec(type=button) -
+                button.filter__button--children.filter__button--dec.filter__button--children--dec(type=button) -
                 .filter__input-wrapper
                   input.item__counter--children(value=0, type='text', disabled)
-                button.filter__button--children.filter__button--inc(type=button) +
+                button.filter__button--children.filter__button--inc.filter__button--children--inc(type=button) +
             .filter__item
               p.item__title.item__title--rooms Rooms
               .filter__item-counter
@@ -79,26 +79,26 @@ mixin top-section
               p.filter__additional-text What is the age of the child you’re travelling with?
               svg.filter__additional-icon
                 use(href='#select')
-              select.filter__additional-select(size=1)
-                option 0 years old
-                option 1 years old
-                option 2 years old
-                option 3 years old
-                option 4 years old
-                option 5 years old
-                option 6 years old
-                option 7 years old
-                option 8 years old
-                option 9 years old
-                option 10 years old
-                option 11 years old
-                option 12 years old
-                option 13 years old
-                option 14 years old
-                option 15 years old
-                option 16 years old
-                option 17 years old
-                option 18 years old
+              //select.filter__additional-select(size=1)
+              //  option 0 years old
+              //  option 1 years old
+              //  option 2 years old
+              //  option 3 years old
+              //  option 4 years old
+              //  option 5 years old
+              //  option 6 years old
+              //  option 7 years old
+              //  option 8 years old
+              //  option 9 years old
+              //  option 10 years old
+              //  option 11 years old
+              //  option 12 years old
+              //  option 13 years old
+              //  option 14 years old
+              //  option 15 years old
+              //  option 16 years old
+              //  option 17 years old
+              //  option 18 years old
         .content__download
           a.content__download_google(href='#')
             svg.content__download_google-icon

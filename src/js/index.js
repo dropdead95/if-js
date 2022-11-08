@@ -41,6 +41,7 @@ const counterInputRooms = document.querySelector('.item__counter--rooms');
 const counterBtnsAdults = document.querySelectorAll('.filter__button--adults');
 const counterBtnsChildren = document.querySelectorAll('.filter__button--children');
 const counterBtnsRooms = document.querySelectorAll('.filter__button--rooms');
+const selectList = document.querySelector('.filter__additional-select');
 
 const showFilter = () => {
   filterWrapper.classList.remove('hide');
@@ -63,6 +64,8 @@ window.addEventListener('click', (e) => {
 let counterAdults = 1;
 let counterChildren = 0;
 let counterRooms = 1;
+let childrenNums = [];
+
 const changeInputCounter = (
   buttonsType,
   counterType,
@@ -80,14 +83,40 @@ const changeInputCounter = (
       e.preventDefault();
       if (index === 0 && counterType > minCount) {
         counterType--;
+        if (e.target.classList.contains('filter__button--children--dec')) {
+          childrenNums.pop();
+          console.log(childrenNums);
+        }
       } else if (index === 1 && counterType < maxCount) {
         counterType++;
+        if (e.target.classList.contains('filter__button--children--inc')) childrenNums.push(counterType);
+        childrenNums.map((i) => {
+          const selectWrapper = document.createElement('div');
+          selectWrapper.innerHTML = `<select class="filter__additional-select" id=${i}>
+                                        <option>0 years old</option>
+                                        <option>1 years old</option>
+                                        <option>2 years old</option>
+                                        <option>3 years old</option>
+                                        <option>4 years old</option>
+                                        <option>5 years old</option>
+                                        <option>6 years old</option>
+                                        <option>7 years old</option>
+                                        <option>8 years old</option>
+                                        <option>9 years old</option>
+                                        <option>10 years old</option>
+                                        <option>11 years old</option>
+                                        <option>12 years old</option>
+                                        <option>13 years old</option>
+                                        <option>14 years old</option>
+                                        <option>15 years old</option>
+                                        <option>16 years old</option>
+                                        <option>17 years old</option>
+                                        <option>18 years old</option>
+                                     </select>`;
+          additional.appendChild(selectWrapper);
+        });
       }
-      if (counterType === value) {
-        buttonsType[0].disabled = true;
-      } else {
-        buttonsType[0].disabled = false;
-      }
+      buttonsType[0].disabled = counterType === value;
       if (counterType === addValue) {
         additional.classList.remove('hide');
       } else if (counterType === 0) additional.classList.add('hide');
