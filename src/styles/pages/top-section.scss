@@ -161,6 +161,7 @@
   }
 
   &__form {
+    position: relative;
     display: flex;
     width: 100%;
     align-items: center;
@@ -250,13 +251,13 @@
 }
 
 select {
+
   appearance: none;
-  position: relative;
   outline: none;
 }
 
 .select__wrapper {
-  position: relative;
+
   display: flex;
   margin-left: 2px;
 }
@@ -284,14 +285,14 @@ select {
     padding: 22px;
     background: #ffffff;
     border-radius: 8px;
-    left: 50px;
+    right: 200px;
     top: 76px;
     width: 259px;
-    height: 158px;
   }
   &__item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
 }
 
@@ -299,25 +300,83 @@ select {
   color: var(--text-color);
   font-size: 16px;
   line-height: 19px;
-  margin-right: 61px;
 }
 
-.filter__button {
+.filter__button--adults, .filter__button--children, .filter__button--rooms {
   width: 30px;
   height: 30px;
   background-color: transparent;
   font-size: 18px;
   line-height: 21px;
   color: #3077c6;
-  border: 1px solid #3077C6;
-  margin-right: 19px;
+  border: 1px solid #3077c6;
   text-align: center;
+  &:disabled {
+    color: #cecece;
+    border: 1px solid #cecece;
+    cursor: auto;
+  }
 }
 
-.item__counter {
-  margin-right: 20px;
+.item__counter--adults,.item__counter--children, .item__counter--rooms  {
+  width: 40px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--text-color);
+}
+
+.filter__item-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter__additional-content {
+  margin-top: 28px;
+}
+.filter__additional-text {
+  margin-bottom: 12px;
+  color: var(--text-color);
+  font-size: 12px;
+  line-height: 14px;
+}
+.filter__additional-select {
+  font-family: Roboto, sans-serif;
+  color: var(--text-color);
+  padding: 8px 32px 8px 8px;
+  border: 1px solid #3077c6;
+  margin-bottom: 5px;
+
+  option {
+    font-family: Roboto, sans-serif;
+    color: var(--text-color);
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+.select--wrapper {
+  position: relative;
+}
+.filter__additional-icon {
+  position: absolute;
+  fill: #3077c6;
+  width: 12px;
+  height: 8px;
+  left: 117px;
+  bottom: 38px;
+  z-index: 1;
+}
+.input-wrapper {
+  background-color: var(--general-white);
 }
 
 .hide {
   display: none;
+}
+.show {
+  display: flex;
+}
+
+.disabled {
 }
