@@ -1,15 +1,14 @@
-import { homesSlider, reviewsSlider } from '../modules/slider';
-
-import data from './homesData';
+import { homesSlider } from '../modules/slider';
 
 // homes cards
 
 const homesSliderWrapper = document.querySelector('.homes__slider-wrapper');
 
-data.forEach(({ city, country, imageUrl, name }) => {
-  const homesSlide = document.createElement('div');
-  homesSlide.classList.add('homes__slide', 'swiper-slide');
-  homesSlide.innerHTML = `
+const getCards = (data) => {
+  data.forEach(({ city, country, imageUrl, name }) => {
+    const homesSlide = document.createElement('div');
+    homesSlide.classList.add('homes__slide', 'swiper-slide');
+    homesSlide.innerHTML = `
                   <div class="homes__slide-image">
                     <img
                       class="homes__slide-image-item"
@@ -22,10 +21,13 @@ data.forEach(({ city, country, imageUrl, name }) => {
                     ${city}, ${country}
                   </div>
   `;
-  homesSliderWrapper.append(homesSlide);
-});
-homesSlider();
-reviewsSlider();
+    homesSliderWrapper.append(homesSlide);
+  });
+  homesSlider();
+};
+fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
+  .then((res) => res.json())
+  .then((data) => getCards(data));
 
 //  filter
 
