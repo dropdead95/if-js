@@ -1,33 +1,6 @@
-import { homesSlider } from '../modules/slider';
-
-// homes cards
-
-const homesSliderWrapper = document.querySelector('.homes__slider-wrapper');
-
-const getCards = (data) => {
-  data.forEach(({ city, country, imageUrl, name }) => {
-    const homesSlide = document.createElement('div');
-    homesSlide.classList.add('homes__slide', 'swiper-slide');
-    homesSlide.innerHTML = `
-                  <div class="homes__slide-image">
-                    <img
-                      class="homes__slide-image-item"
-                      src=${imageUrl}
-                      alt=""
-                    />
-                  </div>
-                  <a href="#" class="homes__slide-title">${name}</a>
-                  <div class="homes__slide-subtitle">
-                    ${city}, ${country}
-                  </div>
-  `;
-    homesSliderWrapper.append(homesSlide);
-  });
-  homesSlider();
-};
-fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
-  .then((res) => res.json())
-  .then((data) => getCards(data));
+import { availableHotelsSlider, homesSlider } from '../modules/slider';
+import { getHomes } from './services/getHomes';
+import data from './homesData';
 
 //  filter
 
@@ -134,6 +107,72 @@ const changeInputCounter = (
 changeInputCounter(counterBtnsAdults, counterAdults, counterInputAdults, inputAdults, 1, 30, 'Adults', 1);
 changeInputCounter(counterBtnsChildren, counterChildren, counterInputChildren, inputChildren, 0, 10, 'Children', 0, 1);
 changeInputCounter(counterBtnsRooms, counterRooms, counterInputRooms, inputRooms, 1, 30, 'Rooms', 1);
+
+// homes cards
+
+const homesSliderWrapper = document.querySelector('.homes__slider-wrapper');
+
+const getCards = (data) => {
+  data.forEach(({ city, country, imageUrl, name }) => {
+    const homesSlide = document.createElement('div');
+    homesSlide.classList.add('homes__slide', 'swiper-slide');
+    homesSlide.innerHTML = `
+                  <div class="homes__slide-image">
+                    <img
+                      class="homes__slide-image-item"
+                      src=${imageUrl}
+                      alt=""
+                    />
+                  </div>
+                  <a href="#" class="homes__slide-title">${name}</a>
+                  <div class="homes__slide-subtitle">
+                    ${city}, ${country}
+                  </div>
+  `;
+    homesSliderWrapper.append(homesSlide);
+  });
+  homesSlider();
+};
+
+getHomes('https://fe-student-api.herokuapp.com/api/hotels').then((data) => getCards(data));
+
+// form
+
+const availableHotelSliderWrapper = document.querySelector('.available-hotels__slider-wrapper');
+const availableHotelsSection = document.querySelector('.available-hotels');
+const destInput = document.getElementById('destination');
+const formBtn = document.querySelector('.content__form_button');
+
+const getAvailableHomes = (data) => {
+  data.forEach(({ city, country, imageUrl, name }) => {
+    const availableHotelsSlide = document.createElement('div');
+    availableHotelsSlide.classList.add('available-hotels__slide', 'swiper-slide');
+    availableHotelsSlide.innerHTML = `
+                  <div class="available-hotels__slide-image">
+                    <img
+                      class="available-hotels__slide-image-item"
+                      src=${imageUrl}
+                      alt=""
+                    />
+                  </div>
+                  <a href="#" class="available-hotels__slide-title">${name}</a>
+                  <div class="available-hotels__slide-subtitle">
+                    ${city}, ${country}
+                  </div>
+  `;
+    availableHotelSliderWrapper.append(availableHotelsSlide);
+  });
+  availableHotelsSlider();
+};
+
+formBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  availableHotelsSection.classList.remove('hide');
+  getHomes(`https://fe-student-api.herokuapp.com/api/hotels?search=${destInput.value}`).then((data) => {
+    getAvailableHomes(data);
+  });
+  destInput.value = '';
+});
 
 // close adv
 
