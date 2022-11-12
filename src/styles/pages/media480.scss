@@ -169,6 +169,42 @@
     }
   }
 
+  .available-hotels {
+    &__container {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    &__slide {
+      gap: 0;
+    }
+
+    &__slide-image {
+      margin-bottom: 8px;
+    }
+
+    &__slide-title {
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    &__slide-subtitle {
+      font-size: 12px;
+    }
+
+    &__slider-btn {
+      width: 28px;
+      height: 28px;
+      left: calc(95% - 9px);
+      top: 50%;
+    }
+
+    &__slider-btn-icon {
+      width: 5px;
+      height: 13px;
+    }
+  }
+
   ._title-section {
     font-weight: 500;
     font-size: 28px;

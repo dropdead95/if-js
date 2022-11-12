@@ -1,0 +1,11 @@
+mixin available-section
+  section.available-hotels.hide
+    .available-hotels__container._container
+      .available-hotels__slider.swiper
+        .available-hotels__preloader.hide
+          img(src='../../')
+        .available-hotels__title._title-section Available hotels
+        .available-hotels__slider-wrapper.swiper-wrapper
+      a.available-hotels__slider-btn.swiper-button-next(href='#')
+        svg.available-hotels__slider-btn-icon
+          use(href='#arrow-btn')

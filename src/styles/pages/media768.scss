@@ -240,6 +240,17 @@
     }
   }
 
+  .available-hotels {
+    &__container {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    &__slider-btn {
+      left: calc(96% - 9px);
+    }
+  }
+
   .destinations {
     &__container {
       padding-top: 60px;
