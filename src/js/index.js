@@ -167,10 +167,15 @@ const getAvailableHomes = (data) => {
 
 formBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  availableHotelsSection.classList.remove('hide');
-  getHomes(`https://fe-student-api.herokuapp.com/api/hotels?search=${destInput.value}`).then((data) => {
-    getAvailableHomes(data);
-  });
+  if (destInput.value !== '') {
+    getHomes(`https://fe-student-api.herokuapp.com/api/hotels?search=${destInput.value}`).then((data) => {
+      availableHotelsSection.classList.remove('hide');
+      getAvailableHomes(data);
+    });
+  } else {
+    document.querySelector('.empty-data').classList.remove('.hide');
+    getAvailableHomes([]);
+  }
   destInput.value = '';
 });
 
