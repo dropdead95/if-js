@@ -64,30 +64,14 @@ const changeInputCounter = (
         if (e.target.classList.contains('filter__button--children--inc')) {
           childrenNums.push(counterType);
           childrenNums.map((i) => {
-            const selectWrapper = document.createElement('div');
-            selectWrapper.classList.add('select--wrapper');
-            selectWrapper.innerHTML = `<select class="filter__additional-select" id=${i}>
-                                        <option>0 years old</option>
-                                        <option>1 years old</option>
-                                        <option>2 years old</option>
-                                        <option>3 years old</option>
-                                        <option>4 years old</option>
-                                        <option>5 years old</option>
-                                        <option>6 years old</option>
-                                        <option>7 years old</option>
-                                        <option>8 years old</option>
-                                        <option>9 years old</option>
-                                        <option>10 years old</option>
-                                        <option>11 years old</option>
-                                        <option>12 years old</option>
-                                        <option>13 years old</option>
-                                        <option>14 years old</option>
-                                        <option>15 years old</option>
-                                        <option>16 years old</option>
-                                        <option>17 years old</option>
-                                        <option>18 years old</option>
+            const selectWrapperInner = document.createElement('div');
+            selectWrapperInner.classList.add('select--wrapper');
+            selectWrapperInner.innerHTML = `<select class="filter__additional-select" id=${i}>
+                                        ${new Array(17)
+                                          .fill(0)
+                                          .map((item, indexOption) => `<option>${indexOption} years old</option>`)}
                                      </select>`;
-            additional.appendChild(selectWrapper);
+            additional.appendChild(selectWrapperInner);
           });
           childrenNums = [];
         }

@@ -24,7 +24,7 @@ export const availableHotelsSlider = () => {
   new Swiper('.available-hotels__slider', {
     modules: [Navigation, Pagination],
     loop: true,
-    slidesPerView: 4,
+    slidesPerView: 2,
     spaceBetween: 16,
     breakpoints: {
       320: {
