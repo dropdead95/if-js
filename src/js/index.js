@@ -143,6 +143,7 @@ const preloader = document.querySelector('.available-hotels__preloader');
 const emptyData = document.querySelector('.empty-data');
 
 const getAvailableHomes = (hotels) => {
+  availableHotelSliderWrapper.innerHTML = '';
   hotels.forEach(({ city, country, imageUrl, name }) => {
     const availableHotelsSlide = document.createElement('div');
     availableHotelsSlide.classList.add('available-hotels__slide');
