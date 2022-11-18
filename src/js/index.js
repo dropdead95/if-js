@@ -1,6 +1,5 @@
-import { availableHotelsSlider, homesSlider } from '../modules/slider';
-import { getHomes } from './services/getHomes';
-import data from './homesData';
+import { availableHotelsSlider, homesSlider, reviewsSlider } from '../modules/slider';
+import getHomes from './services/getHomes';
 
 //  filter
 
@@ -16,7 +15,6 @@ const counterInputRooms = document.querySelector('.item__counter--rooms');
 const counterBtnsAdults = document.querySelectorAll('.filter__button--adults');
 const counterBtnsChildren = document.querySelectorAll('.filter__button--children');
 const counterBtnsRooms = document.querySelectorAll('.filter__button--rooms');
-const selectList = document.querySelector('.filter__additional-select');
 
 const showFilter = () => {
   filterWrapper.classList.remove('hide');
@@ -36,9 +34,9 @@ window.addEventListener('click', (e) => {
   }
 });
 
-let counterAdults = 1;
-let counterChildren = 0;
-let counterRooms = 1;
+const counterAdults = 1;
+const counterChildren = 0;
+const counterRooms = 1;
 let childrenNums = [];
 
 const changeInputCounter = (
@@ -112,8 +110,8 @@ changeInputCounter(counterBtnsRooms, counterRooms, counterInputRooms, inputRooms
 
 const homesSliderWrapper = document.querySelector('.homes__slider-wrapper');
 
-const getCards = (data) => {
-  data.forEach(({ city, country, imageUrl, name }) => {
+const getCards = (cards) => {
+  cards.forEach(({ city, country, imageUrl, name }) => {
     const homesSlide = document.createElement('div');
     homesSlide.classList.add('homes__slide', 'swiper-slide');
     homesSlide.innerHTML = `
@@ -131,9 +129,8 @@ const getCards = (data) => {
   `;
     homesSliderWrapper.append(homesSlide);
   });
-  homesSlider();
 };
-
+homesSlider();
 getHomes('https://fe-student-api.herokuapp.com/api/hotels').then((data) => getCards(data));
 
 // form
@@ -142,11 +139,13 @@ const availableHotelSliderWrapper = document.querySelector('.available-hotels__s
 const availableHotelsSection = document.querySelector('.available-hotels');
 const destInput = document.getElementById('destination');
 const formBtn = document.querySelector('.content__form_button');
+const preloader = document.querySelector('.available-hotels__preloader');
+const emptyData = document.querySelector('.empty-data');
 
-const getAvailableHomes = (data) => {
-  data.forEach(({ city, country, imageUrl, name }) => {
+const getAvailableHomes = (hotels) => {
+  hotels.forEach(({ city, country, imageUrl, name }) => {
     const availableHotelsSlide = document.createElement('div');
-    availableHotelsSlide.classList.add('available-hotels__slide', 'swiper-slide');
+    availableHotelsSlide.classList.add('available-hotels__slide');
     availableHotelsSlide.innerHTML = `
                   <div class="available-hotels__slide-image">
                     <img
@@ -161,22 +160,31 @@ const getAvailableHomes = (data) => {
                   </div>
   `;
     availableHotelSliderWrapper.append(availableHotelsSlide);
+    availableHotelsSlide.classList.add('swiper-slide');
   });
-  availableHotelsSlider();
+};
+availableHotelsSlider();
+const showAvailableHotels = () => {
+  if (destInput.value !== '') {
+    preloader.classList.remove('hide');
+    getHomes(`https://fe-student-api.herokuapp.com/api/hotels?search=${destInput.value}`).then((data) => {
+      if (data.length) {
+        preloader.classList.add('hide');
+        emptyData.classList.add('hide');
+        getAvailableHomes(data);
+        availableHotelsSection.classList.remove('hide');
+      } else {
+        preloader.classList.add('hide');
+        emptyData.classList.remove('hide');
+        availableHotelsSection.classList.add('hide');
+      }
+    });
+  }
 };
 
 formBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  if (destInput.value !== '') {
-    getHomes(`https://fe-student-api.herokuapp.com/api/hotels?search=${destInput.value}`).then((data) => {
-      availableHotelsSection.classList.remove('hide');
-      getAvailableHomes(data);
-    });
-  } else {
-    document.querySelector('.empty-data').classList.remove('.hide');
-    getAvailableHomes([]);
-  }
-  destInput.value = '';
+  showAvailableHotels();
 });
 
 // close adv
@@ -200,3 +208,4 @@ burgerBtn.addEventListener('click', () => {
   burgerContent.classList.toggle('show');
   burgerBtn.classList.toggle('active');
 });
+reviewsSlider();
