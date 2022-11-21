@@ -1,33 +1,5 @@
-import { homesSlider } from '../modules/slider';
-
-// homes cards
-
-const homesSliderWrapper = document.querySelector('.homes__slider-wrapper');
-
-const getCards = (data) => {
-  data.forEach(({ city, country, imageUrl, name }) => {
-    const homesSlide = document.createElement('div');
-    homesSlide.classList.add('homes__slide', 'swiper-slide');
-    homesSlide.innerHTML = `
-                  <div class="homes__slide-image">
-                    <img
-                      class="homes__slide-image-item"
-                      src=${imageUrl}
-                      alt=""
-                    />
-                  </div>
-                  <a href="#" class="homes__slide-title">${name}</a>
-                  <div class="homes__slide-subtitle">
-                    ${city}, ${country}
-                  </div>
-  `;
-    homesSliderWrapper.append(homesSlide);
-  });
-  homesSlider();
-};
-fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
-  .then((res) => res.json())
-  .then((data) => getCards(data));
+import { availableHotelsSlider, homesSlider, reviewsSlider } from '../modules/slider';
+import getHomes from './services/getHomes';
 
 //  filter
 
@@ -43,7 +15,6 @@ const counterInputRooms = document.querySelector('.item__counter--rooms');
 const counterBtnsAdults = document.querySelectorAll('.filter__button--adults');
 const counterBtnsChildren = document.querySelectorAll('.filter__button--children');
 const counterBtnsRooms = document.querySelectorAll('.filter__button--rooms');
-const selectList = document.querySelector('.filter__additional-select');
 
 const showFilter = () => {
   filterWrapper.classList.remove('hide');
@@ -63,9 +34,9 @@ window.addEventListener('click', (e) => {
   }
 });
 
-let counterAdults = 1;
-let counterChildren = 0;
-let counterRooms = 1;
+const counterAdults = 1;
+const counterChildren = 0;
+const counterRooms = 1;
 let childrenNums = [];
 
 const changeInputCounter = (
@@ -93,30 +64,14 @@ const changeInputCounter = (
         if (e.target.classList.contains('filter__button--children--inc')) {
           childrenNums.push(counterType);
           childrenNums.map((i) => {
-            const selectWrapper = document.createElement('div');
-            selectWrapper.classList.add('select--wrapper');
-            selectWrapper.innerHTML = `<select class="filter__additional-select" id=${i}>
-                                        <option>0 years old</option>
-                                        <option>1 years old</option>
-                                        <option>2 years old</option>
-                                        <option>3 years old</option>
-                                        <option>4 years old</option>
-                                        <option>5 years old</option>
-                                        <option>6 years old</option>
-                                        <option>7 years old</option>
-                                        <option>8 years old</option>
-                                        <option>9 years old</option>
-                                        <option>10 years old</option>
-                                        <option>11 years old</option>
-                                        <option>12 years old</option>
-                                        <option>13 years old</option>
-                                        <option>14 years old</option>
-                                        <option>15 years old</option>
-                                        <option>16 years old</option>
-                                        <option>17 years old</option>
-                                        <option>18 years old</option>
+            const selectWrapperInner = document.createElement('div');
+            selectWrapperInner.classList.add('select--wrapper');
+            selectWrapperInner.innerHTML = `<select class="filter__additional-select" id=${i}>
+                                        ${new Array(17)
+                                          .fill(0)
+                                          .map((item, indexOption) => `<option>${indexOption} years old</option>`)}
                                      </select>`;
-            additional.appendChild(selectWrapper);
+            additional.appendChild(selectWrapperInner);
           });
           childrenNums = [];
         }
@@ -134,6 +89,88 @@ const changeInputCounter = (
 changeInputCounter(counterBtnsAdults, counterAdults, counterInputAdults, inputAdults, 1, 30, 'Adults', 1);
 changeInputCounter(counterBtnsChildren, counterChildren, counterInputChildren, inputChildren, 0, 10, 'Children', 0, 1);
 changeInputCounter(counterBtnsRooms, counterRooms, counterInputRooms, inputRooms, 1, 30, 'Rooms', 1);
+
+// homes cards
+
+const homesSliderWrapper = document.querySelector('.homes__slider-wrapper');
+
+const getCards = (cards) => {
+  cards.forEach(({ city, country, imageUrl, name }) => {
+    const homesSlide = document.createElement('div');
+    homesSlide.classList.add('homes__slide', 'swiper-slide');
+    homesSlide.innerHTML = `
+                  <div class="homes__slide-image">
+                    <img
+                      class="homes__slide-image-item"
+                      src=${imageUrl}
+                      alt=""
+                    />
+                  </div>
+                  <a href="#" class="homes__slide-title">${name}</a>
+                  <div class="homes__slide-subtitle">
+                    ${city}, ${country}
+                  </div>
+  `;
+    homesSliderWrapper.append(homesSlide);
+  });
+};
+homesSlider();
+getHomes('https://fe-student-api.herokuapp.com/api/hotels').then((data) => getCards(data));
+
+// form
+
+const availableHotelSliderWrapper = document.querySelector('.available-hotels__slider-wrapper');
+const availableHotelsSection = document.querySelector('.available-hotels');
+const destInput = document.getElementById('destination');
+const formBtn = document.querySelector('.content__form_button');
+const preloader = document.querySelector('.available-hotels__preloader');
+const emptyData = document.querySelector('.empty-data');
+
+const getAvailableHomes = (hotels) => {
+  availableHotelSliderWrapper.innerHTML = '';
+  hotels.forEach(({ city, country, imageUrl, name }) => {
+    const availableHotelsSlide = document.createElement('div');
+    availableHotelsSlide.classList.add('available-hotels__slide');
+    availableHotelsSlide.innerHTML = `
+                  <div class="available-hotels__slide-image">
+                    <img
+                      class="available-hotels__slide-image-item"
+                      src=${imageUrl}
+                      alt=""
+                    />
+                  </div>
+                  <a href="#" class="available-hotels__slide-title">${name}</a>
+                  <div class="available-hotels__slide-subtitle">
+                    ${city}, ${country}
+                  </div>
+  `;
+    availableHotelSliderWrapper.append(availableHotelsSlide);
+    availableHotelsSlide.classList.add('swiper-slide');
+  });
+};
+availableHotelsSlider();
+const showAvailableHotels = () => {
+  if (destInput.value !== '') {
+    preloader.classList.remove('hide');
+    getHomes(`https://fe-student-api.herokuapp.com/api/hotels?search=${destInput.value}`).then((data) => {
+      if (data.length) {
+        preloader.classList.add('hide');
+        emptyData.classList.add('hide');
+        getAvailableHomes(data);
+        availableHotelsSection.classList.remove('hide');
+      } else {
+        preloader.classList.add('hide');
+        emptyData.classList.remove('hide');
+        availableHotelsSection.classList.add('hide');
+      }
+    });
+  }
+};
+
+formBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  showAvailableHotels();
+});
 
 // close adv
 
@@ -156,3 +193,4 @@ burgerBtn.addEventListener('click', () => {
   burgerContent.classList.toggle('show');
   burgerBtn.classList.toggle('active');
 });
+reviewsSlider();

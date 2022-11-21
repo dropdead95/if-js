@@ -20,6 +20,26 @@ export const homesSlider = () => {
   });
 };
 
+export const availableHotelsSlider = () => {
+  new Swiper('.available-hotels__slider', {
+    modules: [Navigation, Pagination],
+    loop: true,
+    slidesPerView: 2,
+    spaceBetween: 16,
+    breakpoints: {
+      320: {
+        slidesPerView: 2,
+      },
+      768: {
+        slidesPerView: 4,
+      },
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+    },
+  });
+};
+
 export const reviewsSlider = () => {
   new Swiper('.reviews__slider', {
     modules: [Navigation, Pagination],

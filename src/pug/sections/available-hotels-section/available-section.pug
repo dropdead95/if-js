@@ -1,0 +1,16 @@
+mixin available-section
+
+  .empty-data.hide
+    p.empty-data__text NO AVAILABLE HOTELS
+    .empty-data__img-wrapper
+      img.empty-data__img(src=require('../../../assets/images/empty.gif'), alt='empty')
+  .available-hotels__preloader.hide
+    img(src=require('../../../assets/images/preloader.gif'), alt='preloader')
+  section.available-hotels.hide
+    .available-hotels__container._container
+      .available-hotels__slider.swiper
+        .available-hotels__title._title-section Available hotels
+        .available-hotels__slider-wrapper.swiper-wrapper
+      a.available-hotels__slider-btn.swiper-button-next(href='#')
+        svg.available-hotels__slider-btn-icon
+          use(href='#arrow-btn')
