@@ -115,7 +115,15 @@ const getCards = (cards) => {
   });
 };
 homesSlider();
-getHomes('https://fe-student-api.herokuapp.com/api/hotels').then((data) => getCards(data));
+
+if (!sessionStorage.getItem('hotels')) {
+  getHomes('https://fe-student-api.herokuapp.com/api/hotels').then((data) => {
+    getCards(data);
+    sessionStorage.setItem('hotels', JSON.stringify(data));
+  });
+} else {
+  getCards(JSON.parse(sessionStorage.getItem('hotels')));
+}
 
 // form
 
@@ -149,10 +157,13 @@ const getAvailableHomes = (hotels) => {
   });
 };
 availableHotelsSlider();
+
 const showAvailableHotels = () => {
+  const url = new URL('https://fe-student-api.herokuapp.com/api/hotels');
+  url.searchParams.append('search', `${destInput.value}`);
   if (destInput.value !== '') {
     preloader.classList.remove('hide');
-    getHomes(`https://fe-student-api.herokuapp.com/api/hotels?search=${destInput.value}`).then((data) => {
+    getHomes(url).then((data) => {
       if (data.length) {
         preloader.classList.add('hide');
         emptyData.classList.add('hide');
