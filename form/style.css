@@ -1,0 +1,16 @@
+.block {
+  /*position: relative;*/
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 500px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
