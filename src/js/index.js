@@ -69,7 +69,10 @@ const changeInputCounter = (
             selectWrapperInner.innerHTML = `<select class="filter__additional-select" id=${i}>
                                         ${new Array(17)
                                           .fill(0)
-                                          .map((item, indexOption) => `<option>${indexOption} years old</option>`)}
+                                          .map(
+                                            (item, indexOption) =>
+                                              `<option value=${indexOption}>${indexOption} years old</option>`,
+                                          )}
                                      </select>`;
             additional.appendChild(selectWrapperInner);
           });
@@ -93,8 +96,24 @@ changeInputCounter(counterBtnsRooms, counterRooms, counterInputRooms, inputRooms
 // homes cards
 
 const homesSliderWrapper = document.querySelector('.homes__slider-wrapper');
+const url = 'https://if-student-api.onrender.com/api/hotels';
 
 const getCards = (cards) => {
+  for (let j = 0; j < cards.length; j++) {
+    for (let i = 0; i < cards.length - 1; i++) {
+      let a = cards[i];
+      let b = cards[i + 1];
+      if (a.name > b.name) {
+        const temp = a;
+        a = b;
+        b = temp;
+      }
+      cards[i] = a;
+      cards[i + 1] = b;
+    }
+    console.log(cards);
+  }
+
   cards.forEach(({ city, country, imageUrl, name }) => {
     const homesSlide = document.createElement('div');
     homesSlide.classList.add('homes__slide', 'swiper-slide');
@@ -117,8 +136,7 @@ const getCards = (cards) => {
 homesSlider();
 
 if (!sessionStorage.getItem('hotels')) {
-  getHomes('https://fe-student-api.herokuapp.com/api/hotels').then((data) => {
-    getCards(data);
+  getHomes(url).then((data) => {
     sessionStorage.setItem('hotels', JSON.stringify(data));
   });
 } else {
@@ -130,9 +148,11 @@ if (!sessionStorage.getItem('hotels')) {
 const availableHotelSliderWrapper = document.querySelector('.available-hotels__slider-wrapper');
 const availableHotelsSection = document.querySelector('.available-hotels');
 const destInput = document.getElementById('destination');
-const formBtn = document.querySelector('.content__form_button');
+const form = document.querySelector('.content__form');
 const preloader = document.querySelector('.available-hotels__preloader');
 const emptyData = document.querySelector('.empty-data');
+const adultsInput = document.getElementById('adults');
+const roomsInput = document.getElementById('rooms');
 
 const getAvailableHomes = (hotels) => {
   availableHotelSliderWrapper.innerHTML = '';
@@ -159,11 +179,21 @@ const getAvailableHomes = (hotels) => {
 availableHotelsSlider();
 
 const showAvailableHotels = () => {
-  const url = new URL('https://fe-student-api.herokuapp.com/api/hotels');
-  url.searchParams.append('search', `${destInput.value}`);
+  const urlAvailable = new URL(url);
+  const ages = [];
+
+  document.querySelectorAll('select').forEach((select) => {
+    ages.push(select.options.selectedIndex);
+  });
+  const childrenStr = ages.join(',');
+
+  urlAvailable.searchParams.append('search', `${destInput.value}`);
+  urlAvailable.searchParams.append('adults', `${adultsInput.value.replace('Adults', '')}`);
+  urlAvailable.searchParams.append('children', `${childrenStr}`);
+  urlAvailable.searchParams.append('rooms', `${roomsInput.value.replace('Rooms', '')}`);
   if (destInput.value !== '') {
     preloader.classList.remove('hide');
-    getHomes(url).then((data) => {
+    getHomes(urlAvailable).then((data) => {
       if (data.length) {
         preloader.classList.add('hide');
         emptyData.classList.add('hide');
@@ -178,7 +208,7 @@ const showAvailableHotels = () => {
   }
 };
 
-formBtn.addEventListener('click', (e) => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
   showAvailableHotels();
 });
