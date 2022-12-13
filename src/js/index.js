@@ -137,6 +137,7 @@ homesSlider();
 
 if (!sessionStorage.getItem('hotels')) {
   getHomes(url).then((data) => {
+    getCards(data);
     sessionStorage.setItem('hotels', JSON.stringify(data));
   });
 } else {
