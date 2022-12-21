@@ -45,9 +45,9 @@ const form = (url) => {
     const childrenStr = ages.join(',');
 
     urlAvailable.searchParams.append('search', `${destInput.value}`);
-    urlAvailable.searchParams.append('adults', `${adultsInput.value.replace('Adults', '')}`);
-    urlAvailable.searchParams.append('children', `${childrenStr}`);
-    urlAvailable.searchParams.append('rooms', `${roomsInput.value.replace('Rooms', '')}`);
+    urlAvailable.searchParams.append('adults', `${adultsInput.value.replace('Adults', '')}`.trim());
+    urlAvailable.searchParams.append('children', `${childrenStr}`.trim());
+    urlAvailable.searchParams.append('rooms', `${roomsInput.value.replace('Rooms', '')}`.trim());
     if (destInput.value !== '') {
       preloader.classList.remove('hide');
       getHomes(urlAvailable).then((data) => {
